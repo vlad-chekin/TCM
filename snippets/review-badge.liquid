@@ -1,0 +1,13 @@
+<div class="review-badge">
+  {% if badge_template == "product" %}
+{% comment %}<span class="stamped-product-reviews-badge stamped-main-badge" data-id="{{ product.id }}" data-product-sku="{{ product.handle }}" data-product-type="{{product.type}}" data-product-title="{{product.title}}" style="display: inline-block;">{{ product.metafields.stamped.badge }}</span>{% endcomment %}    
+  {% elsif badge_template == "grid" %}
+    <!-- INSERT [PRODUCT GRID] REVIEW BADGE HERE -->
+    
+  {% endif %}
+
+{% comment %}Start automatically added Judge.me widget{% endcomment %}
+{% comment %}  {% render 'judgeme_widgets', widget_type: 'judgeme_preview_badge', concierge_install: true, product: product %} {% endcomment %}
+{% comment %}End automatically added Judge.me widget{% endcomment %}
+  <span class="stamped-product-reviews-badge stamped-main-badge" data-id="{{ product.id }}" data-product-sku="{{ product.handle }}" data-product-type="{{product.type}}" data-product-title="{{product.title}}" style="display: inline-block;">{{ product.metafields.stamped.badge }}</span>
+</div>

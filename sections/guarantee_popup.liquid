@@ -1,0 +1,95 @@
+{% if section.blocks.size > 0 %}
+  <div class="guarantee-popup__block popup_block" style="display: none;">
+      <div class="wrapper popup-body"> 
+          <!-- Blocks -->
+        <span class="guarantee-popup__close close-popup">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="black"/>
+          </svg>
+        </span>
+        <div class="guarantee-popup__header">
+          <div class="guarantee-popup__logo">
+          	{% assign image_size = section.settings.height_logo | prepend: 'x' %}
+        	<img class="custom-popup__logo" src="{{ section.settings.guarantee-popup_img | img_url: image_size }}"    
+                 alt="{{ section.settings.guarantee-popup_img.alt | default: shop.name }}"
+                 itemprop="logo" />
+          </div>
+          <h2>{{ section.settings.guarantee-popup-header__header}}</h2>
+          <p>{{ section.settings.guarantee-popup-header__text}}</p>
+        </div>
+        
+          <ul class="guarantee-items">
+          {% for block in section.blocks %}
+              <li class="guarantee-item">
+                <div class="guarantee-content__header">
+                  <div class="guarantee-icon">
+                    <span class="fas fa-{{ block.settings.popup-guarantee__icon }} fa-2x"></span>
+                  </div>
+                  <h5 class="guarantee-popup__title">{{ block.settings.popup-guarantee__title }}</h5>
+                </div>
+                <div class="rte guarantee-popup-text">{{ block.settings.popup-guarantee__text }}</div>
+              </li>
+          {% endfor %}
+          </ul>
+      </div>
+  </div>
+{% endif %}
+
+
+{% schema %}
+  {
+    "name": "Guarantee Popup",
+    "class": "guarantee-popup",
+    "max_blocks": 4,
+	"settings": [
+	  {
+        "type": "header",
+        "content": "Header settings"
+      },
+ 	  {
+        "type": "image_picker",
+        "id": "guarantee-popup_img",
+        "label": "Image popup"
+      },
+      {
+        "type": "text",
+        "id": "guarantee-popup-header__header",
+        "label": "Guarantee Popup header header",
+        "default": "Header"
+      },
+	  {
+        "type": "text",
+        "id": "guarantee-popup-header__text",
+        "label": "Guarantee Popup header text",
+        "default": "text"
+      }
+	],
+	"blocks" : [
+	  {
+        "type": "text",
+        "name": "Guarantee Popup item",
+        "settings": [
+		  {
+            "type": "text",
+            "id": "popup-guarantee__icon",
+            "label":"Icon",
+			"info": "Enter the name of any free solid icons on [FontAwesome](https://fontawesome.com/icons?d=gallery&s=solid&m=free)",
+            "default": "trophy"
+          },
+          {
+            "type": "text",
+            "id": "popup-guarantee__title",
+            "label":"Heading",
+            "default": "Our Guarantee"
+          },
+          {
+            "type": "richtext",
+            "id": "popup-guarantee__text",
+            "label": "Text",
+            "default":"<p>Share your guarantees with your customers.</p>"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

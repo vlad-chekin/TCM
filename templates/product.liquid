@@ -1,0 +1,43 @@
+<!-- /templates/product.liquid -->
+{% comment %}
+  The contents of the product.liquid template can be found in /sections/product-template.liquid
+{% endcomment %}
+
+<div itemscope itemtype="http://schema.org/Product">
+
+  <div class="product-single{% if section.settings.product_photo_alignement == 'right' %} product-photos-right{% endif %}">
+    <div class="box">
+	  {% section 'product-template' %}
+	  {% section 'product-recommendations' %}
+	  {% section 'product-description' %}
+    </div>
+  </div>
+
+  {% include "dbtfy-linked-options" %}
+  {% section "dbtfy-upsell-bundles" %}   
+  
+  {% if settings.review_widget == 'review_widget_above' %}
+    {% include 'review-widget' %}
+  {% endif %}
+  
+  {% section 'related-product' %}
+
+  {% if settings.review_widget == 'review_widget_under' %}
+    {% include 'review-widget' %}
+  {% endif %}
+  
+  {% if collection %}
+    <div class="back-box">
+      <a href="{{ collection.url }}" class="btn btn--banner">
+        <span class="fas fa-arrow-left" aria-hidden="true"></span>
+        {{ 'products.general.collection_return' | t: collection: collection.title }}
+      </a>
+    </div>
+  {% endif %}
+  
+  {% section 'quotes' %}
+
+</div>
+{% comment %}
+{% render 'judgeme_widgets', widget_type: 'judgeme_review_widget', concierge_install: true, auto_install: true, product: product %}
+{% endcomment %}
